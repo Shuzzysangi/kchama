@@ -104,6 +104,10 @@ public class UserPayments extends AppCompatActivity {
         setSpinDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                hour = calendar.get(Calendar.HOUR_OF_DAY);
+                minute = calendar.get(Calendar.MINUTE);
+                
                 picker = new TimePickerDialog(UserPayments.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
@@ -122,7 +126,6 @@ public class UserPayments extends AppCompatActivity {
                 month = datePicker.getMonth()+1;
                 year  = datePicker.getYear();
 
-                Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, month, date, hour, minute);
                 // format date
                 spinDate = date+"/"+month+"/"+year+" "+hour+":"+minute;

@@ -8,10 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sharon.mpesa.stkpush.Mode;
 import com.sharon.mpesa.stkpush.api.response.STKPushResponse;
 import com.sharon.mpesa.stkpush.interfaces.STKListener;
@@ -22,6 +26,9 @@ import com.sharon.mpesa.stkpush.model.Token;
 import com.sharon.mpesa.stkpush.model.Transaction;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -35,6 +42,12 @@ public class MpesaActivity extends AppCompatActivity implements TokenListener {
 
     private String phone_number;
     private String amount;
+    private String spinDateStr;
+    private Date dateNow, spinDate;
+    FirebaseDatabase database;
+    DatabaseReference cyclesRef;
+    boolean isPenalized  = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +56,8 @@ public class MpesaActivity extends AppCompatActivity implements TokenListener {
 
         phoneET = findViewById(R.id.phoneET);
         amountET = findViewById(R.id.amountET);
+        database = FirebaseDatabase.getInstance();
+        cyclesRef = database.getReference("/cycles");
 
         mpesa = new Mpesa(Config.CONSUMER_KEY, Config.CONSUMER_SECRET, Mode.SANDBOX);
 
@@ -50,6 +65,34 @@ public class MpesaActivity extends AppCompatActivity implements TokenListener {
         sweetAlertDialog.setTitleText("Connecting to Safaricom");
         sweetAlertDialog.setContentText("Please wait...");
         sweetAlertDialog.setCancelable(false);
+
+        // get spin date from database
+        cyclesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    spinDateStr = snapshot.getValue().toString();
+                    SimpleDateFormat formatter = new SimpleDateFormat();
+                    try {
+                        spinDate = formatter.parse(spinDateStr);
+                        dateNow = new Date();
+
+                        // check if user will be fined or not
+                        if(!dateNow.before(spinDate)){
+                            //Toast.makeText(MpesaActivity.this, "Note that due to late payment, you will attract a penalty. You were supposed to have paid before "+spinDateStr, Toast.LENGTH_LONG).show();
+                            isPenalized = true;
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void startMpesa(View view) {

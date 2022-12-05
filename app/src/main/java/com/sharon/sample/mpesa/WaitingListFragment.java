@@ -27,7 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class WaitingListFragment extends Fragment {
@@ -35,11 +38,15 @@ public class WaitingListFragment extends Fragment {
     MyAdapter myAdapter;
     ArrayList<User> users;
     FirebaseDatabase database;
-    DatabaseReference ref, usersRef, awardedUsersRef;
+    DatabaseReference ref, usersRef, awardedUsersRef, cyclesRef;
     ImageView spinImage;
     Animation spinAnimation;
     ProgressDialog loader;
     AlertDialog.Builder builder;
+    String spinDateStr;
+    Date dateNow, spinDate;
+    boolean canSpin = false;
+
 
     // required default constructor
     public WaitingListFragment() {
@@ -72,10 +79,47 @@ public class WaitingListFragment extends Fragment {
         ref = database.getReference();
         usersRef = database.getReference("user");
         awardedUsersRef = database.getReference("users/awarded");
+        cyclesRef = database.getReference("/cycles");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(myAdapter);
+
+        // get spin date from database
+        cyclesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    spinDateStr = snapshot.getValue().toString();
+                    SimpleDateFormat formatter = new SimpleDateFormat();
+                    try {
+                        spinDate = formatter.parse(spinDateStr);
+                        dateNow = new Date();
+                        long timeDiff = spinDate.getTime()-dateNow.getTime();
+                        long timeDiffInHours = (timeDiff/(1000 * 60 * 60)) % 24;
+                        // check if spin date already reached
+                        if(timeDiffInHours >0 && timeDiffInHours <= 2){
+                            canSpin = true;
+                            return;
+                        }
+
+                        if(timeDiffInHours < 0){
+                            canSpin = false;
+                        }
+                        // user cannot spin
+                        canSpin = false;
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // listen for data change in users database reference
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -132,8 +176,14 @@ public class WaitingListFragment extends Fragment {
             public void onAnimationRepeat(Animation animation) { }
         });
 
-        // randomly select a user
+        // Actual spinning
         spinImage.setOnClickListener(v -> {
+            // check for spin date
+            if(!canSpin){
+                Toast.makeText(getActivity(), "Spin date not yet. Spin date is on: "+spinDateStr, Toast.LENGTH_LONG).show();
+                return;
+            }
+
             if(users.size() == 0){
                 Toast.makeText(getActivity().getApplicationContext(), "All members have been awarded.", Toast.LENGTH_SHORT).show();
                 return;
@@ -190,4 +240,5 @@ public class WaitingListFragment extends Fragment {
                 });
     }
 
-}
+    }
+
