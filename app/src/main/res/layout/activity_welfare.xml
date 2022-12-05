@@ -98,14 +98,31 @@
 
 
         </LinearLayout>
+            <LinearLayout
 
-
-            <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnsub"
-                android:text="Submit"
-                android:textStyle="bold"/>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnsub"
+                    android:text="Submit"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnView"
+                    android:text="ViewProjects"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

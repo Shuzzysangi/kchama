@@ -83,8 +83,7 @@ public class Mpesa {
         }
 
         String consumerKeySecret = consumerKey + ":" + consumerSecret;
-        byte[] bytes = consumerKeySecret.getBytes("ISO-8859-1");
-        return "Basic " + Base64.encodeToString(bytes, Base64.NO_WRAP);
+        return "Basic " + Base64.encodeToString(consumerKeySecret.getBytes(), Base64.NO_WRAP);
     }
 
     /**

@@ -16,6 +16,7 @@ public class AdminDashboard extends AppCompatActivity {
     private CardView Reg;
     private CardView wels;
     private CardView Send;
+    private CardView verify;
     private CardView userPayments;
 
     @SuppressLint("MissingInflatedId")
@@ -25,21 +26,24 @@ public class AdminDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_admin_dashboard);
         Reg=findViewById(R.id.reg);
        Send=findViewById(R.id.Send);
-        wels=findViewById(R.id.wels);
+        verify=findViewById(R.id.verify);
+       wels=findViewById(R.id.wels);
         userPayments = findViewById(R.id.userPayments);
 
         Reg.setOnClickListener(View->{
-            Toast.makeText(AdminDashboard.this, "Registration", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AdminDashboard.this,ViewInfo.class);
             startActivity(intent);
         });
         Send.setOnClickListener(View->{
-            Toast.makeText(AdminDashboard.this, "SMS", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AdminDashboard.this, SendSMS.class);
             startActivity(intent);
         });
+
+        verify.setOnClickListener(View->{
+            Intent intent = new Intent(AdminDashboard.this,VerifyPayments.class);
+            startActivity(intent);
+        });
         wels.setOnClickListener(View->{
-            Toast.makeText(AdminDashboard.this, " Welfares", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AdminDashboard.this, Welfare.class);
             startActivity(intent);
         });

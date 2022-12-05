@@ -22,7 +22,7 @@ public class UserDashboard extends AppCompatActivity {
         prog = findViewById(R.id.prog);
         meriGo = findViewById(R.id.M);
         pay.setOnClickListener(View -> {
-            Intent intent = new Intent(UserDashboard.this, MpesaActivity.class);
+            Intent intent = new Intent(UserDashboard.this, PaymentDetails.class);
             startActivity(intent);
 
         });

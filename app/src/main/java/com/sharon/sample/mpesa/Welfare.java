@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 public class Welfare extends AppCompatActivity {
 
-    private Button btnsub;
+    private Button btnsub,btnView;
     private TextInputEditText name;
     private TextInputEditText description;
     private DatabaseReference SpinnerRef;
@@ -42,6 +42,7 @@ public class Welfare extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welfare);
         btnsub=findViewById(R.id.btnsub);
+        btnView=findViewById(R.id.btnView);
         name=findViewById(R.id.name);
         description=findViewById(R.id.desc);
         calendar = Calendar.getInstance();
@@ -82,6 +83,14 @@ public class Welfare extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Welfare.this,ProjectsActivity.class);
+                startActivity(intent);
+
             }
         });
 
