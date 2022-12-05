@@ -17,8 +17,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/code"
-        android:text="Mpesa Code:"
+        android:id="@+id/mPesaCode"
+        android:hint="Mpesa Code:"
         android:inputType="text"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/amount"
-        android:text="Amount Paid:"
+        android:hint="Amount Paid:"
         android:inputType="number"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/purpose"
-        android:text="Purpose:"
+        android:hint="Purpose:"
         android:inputType="text"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -47,8 +47,5 @@
         android:textSize="20dp"
         android:text="Submit"
         android:layout_gravity="center_horizontal"/>
-
-
-
 
 </LinearLayout>
