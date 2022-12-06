@@ -38,77 +38,45 @@
         android:layout_marginTop="5dp"
         />
 
-<!--    Kchama projects in table layout-->
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:background="#51B435"
+        android:gravity="center"
+        android:padding="5dp"
         >
-        <TableRow
-            android:background="#51B435"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="S/No."
-                />
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="S/No."
+            android:layout_marginStart="15dp"
+            android:gravity="end"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Project Name"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Description"
-                />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date"
-                />
-        </TableRow>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            />
+    </LinearLayout>
 
-        <TableRow
-            android:background="#F0F0F0"
-            android:padding="10dp"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:text="1"/>
-            <TextView
-                android:layout_width="15dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Project Name"
-                android:padding="3dp"/>
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Project Desctiption goes here. Lorem ipsium dolor sit amet "
-                android:padding="3dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="02/12/2022"
-                android:gravity="end"
-                android:padding="3dp"/>
-
-        </TableRow>
-    </TableLayout>
+<!--    Kchama projects in Listview-->
+ <ListView
+     android:id="@+id/lvProjects"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -38,74 +38,51 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         />
-
-<!--    MeriGo winners in table layout-->
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:orientation="horizontal"
+    android:background="#51B435">
+    <TextView
+        android:id="@+id/sNo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        >
-        <TableRow
-            android:background="#51B435"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="S/No." />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Phone Number" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Name" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date" />
-        </TableRow>
+        android:text="S/No"
+        android:layout_weight="1"
+        android:padding="3dp"
+        />
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Phone Number"
+        />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Username"
+        android:padding="3dp"
+        />
+    <TextView
+        android:id="@+id/winDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Award Date"
+        android:padding="3dp"
+        android:gravity="end"
+        />
 
-        <TableRow
-            android:background="#F0F0F0"
-            android:padding="10dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1"
-                android:padding="3dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="0767544783"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="John Doe"
-                android:padding="3dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="02/12/2022"
-                android:padding="3dp"
-                android:gravity="end"
-                />
-        </TableRow>
-    </TableLayout>
+</LinearLayout>
+
+    <ListView
+        android:id="@+id/lvMeriGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
 
 </LinearLayout>

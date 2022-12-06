@@ -179,10 +179,10 @@ public class WaitingListFragment extends Fragment {
         // Actual spinning
         spinImage.setOnClickListener(v -> {
             // check for spin date
-            if(!canSpin){
-                Toast.makeText(getActivity(), "Spin date not yet. Spin date is on: "+spinDateStr, Toast.LENGTH_LONG).show();
-                return;
-            }
+//            if(!canSpin){
+//                Toast.makeText(getActivity(), "You are not allowed to spin right now ", Toast.LENGTH_LONG).show();
+//                return;
+//            }
 
             if(users.size() == 0){
                 Toast.makeText(getActivity().getApplicationContext(), "All members have been awarded.", Toast.LENGTH_SHORT).show();
