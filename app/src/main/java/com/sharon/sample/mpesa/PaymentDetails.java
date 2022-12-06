@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +46,7 @@ public class PaymentDetails extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         paymentsRef = database.getReference("/payments");
         loader = new ProgressDialog(this);
+        prefs = getSharedPreferences("user_details", Context.MODE_PRIVATE);
         loader.setTitle("Posting data");
         loader.setMessage("Uploading your data... Please wait...");
         loader.setCancelable(false);
@@ -60,17 +64,23 @@ public class PaymentDetails extends AppCompatActivity {
                 }
 
                 // get logged in user details
-                String email = prefs.getString("email", null);
+                String email = prefs.getString("email", "defaultuser@gmail.com");
+                String id = prefs.getString("id", null);
+                String phoneNumber = prefs.getString("phoneNumber", null);
+
                 loader.show();
                 paymentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Map<String, String> paymentInfo = new HashMap<>();
-                        paymentInfo.put("mPesaCode", mPesaCode);
-                        paymentInfo.put("amount",String.valueOf(amount));
-                        paymentInfo.put("purpose", purpose);
+                        String key = paymentsRef.push().getKey();
+                        UserPayment payment = new UserPayment();
+                        payment.setId(key);
+                        payment.setMpesaCode(mPesaCode);
+                        payment.setAmount(amount);
+                        payment.setPurpose(purpose);
+                        payment.setPhoneNumber(phoneNumber);
 
-                        paymentsRef.child(email).setValue(paymentInfo);
+                        paymentsRef.child(key).setValue(payment.toMap());
                         loader.dismiss();
                         Toast.makeText(PaymentDetails.this, "Payment Details submitted successfully.", Toast.LENGTH_SHORT).show();
 

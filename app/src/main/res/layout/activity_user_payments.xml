@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/p"
-    tools:context=".UserPayments">
+    tools:context=".UserPaymentsActivity">
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"

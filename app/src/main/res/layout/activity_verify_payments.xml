@@ -11,47 +11,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/verify"
-        android:text="Verification Of User Payments"
+        android:text="Verification Of Members Payments"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:textSize="25dp"/>
 
-    <EditText
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/lvPayments"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/code"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="Mpesa Code:"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/amount"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="Amount Paid:"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/purpose"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="Purpose:"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="Name:"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Verify"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
+        />
 </LinearLayout>
