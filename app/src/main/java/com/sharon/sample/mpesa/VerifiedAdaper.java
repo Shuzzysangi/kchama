@@ -19,19 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class UserPaymentsAdaper extends BaseAdapter {
+public class VerifiedAdaper extends BaseAdapter {
     ArrayList<UserPayment> payments;
     Context context;
-    DatabaseReference paymentsRef;
-    ProgressDialog loader;
-    public UserPaymentsAdaper(Context ctx, ArrayList<UserPayment> payments){
+    public VerifiedAdaper(Context ctx, ArrayList<UserPayment> payments){
         context = ctx;
         this.payments = payments;
-        paymentsRef = FirebaseDatabase.getInstance().getReference("payments");
-        loader = new ProgressDialog(context);
-//        loader.setTitle("Verifying info");
-        loader.setMessage("Verifying payment ...");
-        loader.setCancelable(true);
     }
 
     @Override
@@ -51,49 +44,25 @@ public class UserPaymentsAdaper extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
+        Button btnVerify;
         TextView mPesaCode, amount, purpose, name, phoneNumber;
-        Button verify;
         view = LayoutInflater.from(context).inflate(R.layout.verify_payments, parent, false);
         mPesaCode = view.findViewById(R.id.mPesaCode);
         amount = view.findViewById(R.id.amount);
         purpose = view.findViewById(R.id.purpose);
         name = view.findViewById(R.id.name);
-        verify = view.findViewById(R.id.verify);
         phoneNumber = view.findViewById(R.id.phoneNumber);
+        btnVerify = view.findViewById(R.id.verify);
+
+        // hide verify button
+        btnVerify.setVisibility(View.GONE);
 
         mPesaCode.setText("M-Pesa Code: "+payments.get(position).getMpesaCode());
         amount.setText("Amount: "+String.valueOf(payments.get(position).getAmount()));
         purpose.setText("Purpose: "+payments.get(position).getPurpose());
         name.setText("Name: "+payments.get(position).getName());
         phoneNumber.setText("Phone: "+payments.get(position).getPhoneNumber());
-
-
-        // verify on button click
-        verify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loader.show();
-                UserPayment pymt = payments.get(position);
-                pymt.setVerified(true);
-
-                paymentsRef.child(pymt.getId()).setValue(pymt.toMap())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                loader.dismiss();
-                                if(task.isSuccessful()){
-                                    Toast.makeText(context, "Payment verified successfully", Toast.LENGTH_SHORT).show();
-                                    // remove the item from array
-                                    payments.remove(pymt);
-                                    UserPaymentsAdaper.super.notifyDataSetChanged();
-                                }else{
-                                    Toast.makeText(context, "Something went wrong verifying payment info.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-        });
-
+        
         return view;
     }
 }
