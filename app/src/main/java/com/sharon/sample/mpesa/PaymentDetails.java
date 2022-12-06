@@ -67,6 +67,7 @@ public class PaymentDetails extends AppCompatActivity {
                 String email = prefs.getString("email", "defaultuser@gmail.com");
                 String id = prefs.getString("id", null);
                 String phoneNumber = prefs.getString("phoneNumber", null);
+                String username = prefs.getString("username", null);
 
                 loader.show();
                 paymentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,6 +79,7 @@ public class PaymentDetails extends AppCompatActivity {
                         payment.setMpesaCode(mPesaCode);
                         payment.setAmount(amount);
                         payment.setPurpose(purpose);
+                        payment.setName(username);
                         payment.setPhoneNumber(phoneNumber);
 
                         paymentsRef.child(key).setValue(payment.toMap());

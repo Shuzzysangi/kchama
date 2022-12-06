@@ -41,7 +41,6 @@ public class MeriGoReport extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_meri_go_report, container, false);
         tableLayout = view.findViewById(R.id.tableLayout);
-        tableLayout = view.findViewById(R.id.tableLayout);
 
         TableRow row = new TableRow(getContext());
         row.setBackgroundColor(Color.parseColor("#51B435"));

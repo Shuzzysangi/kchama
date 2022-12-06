@@ -57,7 +57,8 @@ public class UserPayment {
         info.put("mPesaCode", mPesaCode);
         info.put("amount", amount);
         info.put("purpose", purpose);
-        info.put("phoneNumber", "");
+        info.put("phoneNumber", phoneNumber);
+        info.put("name", name);
         info.put("verified", verified);
         return  info;
     }

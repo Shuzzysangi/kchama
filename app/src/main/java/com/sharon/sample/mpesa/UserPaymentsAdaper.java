@@ -51,19 +51,22 @@ public class UserPaymentsAdaper extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        TextView mPesaCode, amount, purpose, name;
+        TextView mPesaCode, amount, purpose, name, phoneNumber;
         Button verify;
         view = LayoutInflater.from(context).inflate(R.layout.verify_payments, parent, false);
         mPesaCode = view.findViewById(R.id.mPesaCode);
         amount = view.findViewById(R.id.amount);
         purpose = view.findViewById(R.id.purpose);
-//        name = view.findViewById(R.id.name);
+        name = view.findViewById(R.id.name);
         verify = view.findViewById(R.id.verify);
+        phoneNumber = view.findViewById(R.id.phoneNumber);
 
-        mPesaCode.setText(payments.get(position).getMpesaCode());
-        amount.setText(String.valueOf(payments.get(position).getAmount()));
-        purpose.setText(payments.get(position).getPurpose());
-//        name.setText(payments.get(position).getName());
+        mPesaCode.setText("M-Pesa Code: "+payments.get(position).getMpesaCode());
+        amount.setText("Amount: "+String.valueOf(payments.get(position).getAmount()));
+        purpose.setText("Purpose: "+payments.get(position).getPurpose());
+        name.setText("Name: "+payments.get(position).getName());
+        phoneNumber.setText("Phone: "+payments.get(position).getPhoneNumber());
+
 
         // verify on button click
         verify.setOnClickListener(new View.OnClickListener() {

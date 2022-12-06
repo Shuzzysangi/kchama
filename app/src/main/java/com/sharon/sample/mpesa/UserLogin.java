@@ -55,7 +55,9 @@ public class UserLogin extends AppCompatActivity {
         if(!(pref.getString("email", "").isEmpty() && pref.getString("password","").isEmpty())){
             Intent intent = new Intent(UserLogin.this, UserDashboard.class);
             startActivity(intent);
+            finish();
         }
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,13 +90,11 @@ public class UserLogin extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             for(DataSnapshot ds : snapshot.getChildren()){
-                                                if(ds.getKey() == firebaseUser.getUid()){
+                                                User user = ds.getValue(User.class);
+                                                if(user.getId().equals(firebaseUser.getUid())){
                                                     // user found
                                                     SharedPreferences.Editor editor = pref.edit();
 
-                                                    User user = ds.getValue(User.class);
-
-                                                    Toast.makeText(UserLogin.this, "Username "+user.getName()+user.getPhoneNumber(), Toast.LENGTH_LONG).show();
                                                     editor.putString("username", user.getName());
                                                     editor.putString("email",email);
                                                     editor.putString("password",password);
@@ -102,20 +102,24 @@ public class UserLogin extends AppCompatActivity {
                                                     editor.putString("phoneNumber", user.getPhoneNumber());
                                                     editor.commit();
 
+                                                    // move to User dashboard
+                                                    Intent intent = new Intent(UserLogin.this, UserDashboard.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                    return;
                                                 }
                                             }
                                         }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
-
+                                            Toast.makeText(UserLogin.this, "Database error on login: "+error.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                                }else{
+                                    // no firebase user
+                                    Toast.makeText(UserLogin.this, "mAuth has no firebase user.", Toast.LENGTH_SHORT).show();
                                 }
-
-                                 Intent intent = new Intent(UserLogin.this, UserDashboard.class);
-                                  startActivity(intent);
-                                 finish();
                             } else {
                                 Toast.makeText(UserLogin.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
