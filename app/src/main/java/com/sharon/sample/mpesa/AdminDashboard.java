@@ -70,7 +70,7 @@ public class AdminDashboard extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(AdminDashboard.this,AdminLogin.class));
+                        startActivity(new Intent(AdminDashboard.this,Dashboard.class));
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonalReport"
+    tools:context=".UserReport"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -43,6 +43,7 @@
                 android:text="Total MeriGo Contributions"
                 android:textStyle="bold" />
             <TextView
+                android:id="@+id/merigoTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -64,6 +65,7 @@
                 android:text="Total Projects Contribution"
                 android:textStyle="bold" />
             <TextView
+                android:id="@+id/projectsTotal"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:text="Ksh 250"

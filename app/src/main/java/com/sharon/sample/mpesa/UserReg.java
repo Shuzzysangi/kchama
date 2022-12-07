@@ -81,7 +81,7 @@ public class UserReg extends AppCompatActivity {
                     registerPhoneNumber.setError("PhoneNumber is Required!");
                     return;
                 } else {
-                    loader.setMessage("Registering you....");
+                    loader.setMessage("Registering member....");
                     loader.setCanceledOnTouchOutside(false);
                     loader.show();
 
@@ -92,7 +92,7 @@ public class UserReg extends AppCompatActivity {
                             if (!task.isSuccessful()){
                                 String error=task.getException().toString();
                                 Toast.makeText(UserReg.this,"Error"+error,Toast.LENGTH_LONG).show();
-
+                                loader.dismiss();
 
                             }
                             else {
@@ -110,7 +110,7 @@ public class UserReg extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
                                         if (task.isSuccessful()){
-                                            Toast.makeText(UserReg.this,"Data Set Successfully",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(UserReg.this,"User registered successfully",Toast.LENGTH_SHORT).show();
 
                                             Intent intent=new Intent(UserReg.this,AdminDashboard.class);
 
@@ -123,12 +123,12 @@ public class UserReg extends AppCompatActivity {
                                             editor.apply();
                                             editor.commit();
 
+                                            loader.dismiss();
                                             startActivity(intent);
                                             finish();
-                                            loader.dismiss();
 
                                         }else{
-                                            Toast.makeText(UserReg.this,task.getException().toString(),Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(UserReg.this,"Registration not successful. Error: "+task.getException().toString(),Toast.LENGTH_SHORT).show();
                                             finish();
                                             loader.dismiss();
                                         }

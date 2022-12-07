@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mPesaCode"
-        android:hint="Mpesa Code:"
+        android:hint="Enter Mpesa Code"
         android:inputType="text"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/amount"
-        android:hint="Amount Paid:"
+        android:hint="Enter Amount Paid"
         android:inputType="number"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/purpose"
-        android:hint="Purpose:"
+        android:hint="Enter Purpose e.g. Merigo or Project"
         android:inputType="text"
         android:textStyle="bold"
         android:textSize="20sp"/>

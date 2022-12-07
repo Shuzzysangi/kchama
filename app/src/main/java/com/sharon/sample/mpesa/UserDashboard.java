@@ -47,7 +47,7 @@ public class UserDashboard extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         //  delete data in shared preferences
                         logout();
-                        startActivity(new Intent(UserDashboard.this,UserLogin.class));
+                        startActivity(new Intent(UserDashboard.this,Dashboard.class));
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
