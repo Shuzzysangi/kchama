@@ -71,7 +71,7 @@ public class UserDashboard extends AppCompatActivity {
         });
 
        select.setOnClickListener(View -> {
-           Intent intent = new Intent(UserDashboard.this, SelectWinner.class);
+           Intent intent = new Intent(UserDashboard.this, Reports.class);
            startActivity(intent);
        });
 

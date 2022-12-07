@@ -19,6 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserLogin extends AppCompatActivity {
 
@@ -29,6 +35,7 @@ public class UserLogin extends AppCompatActivity {
     private EditText loginPassword;
     private ProgressDialog loader;
     private FirebaseAuth mAuth;
+    DatabaseReference usersRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,7 @@ public class UserLogin extends AppCompatActivity {
         loader = new ProgressDialog(this);
         loginButton = findViewById(R.id.loginButton);
         mAuth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase.getInstance().getReference("/user");
 
         /**
          * Check if there are login details saved in shared preferences and use them instead
@@ -47,7 +55,9 @@ public class UserLogin extends AppCompatActivity {
         if(!(pref.getString("email", "").isEmpty() && pref.getString("password","").isEmpty())){
             Intent intent = new Intent(UserLogin.this, UserDashboard.class);
             startActivity(intent);
+            finish();
         }
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,13 +82,44 @@ public class UserLogin extends AppCompatActivity {
                                 /*
                                  * Save user login details in shared preferences so that they do not need to login every time
                                  */
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("email",email);
-                                editor.putString("password",password);
-                                editor.commit();
-                                 Intent intent = new Intent(UserLogin.this, UserDashboard.class);
-                                  startActivity(intent);
-                                 finish();
+                                final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+                                if(firebaseUser != null){
+                                    // get user info from database
+                                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for(DataSnapshot ds : snapshot.getChildren()){
+                                                User user = ds.getValue(User.class);
+                                                if(user.getId().equals(firebaseUser.getUid())){
+                                                    // user found
+                                                    SharedPreferences.Editor editor = pref.edit();
+
+                                                    editor.putString("username", user.getName());
+                                                    editor.putString("email",email);
+                                                    editor.putString("password",password);
+                                                    editor.putString("id", user.getId());
+                                                    editor.putString("phoneNumber", user.getPhoneNumber());
+                                                    editor.commit();
+
+                                                    // move to User dashboard
+                                                    Intent intent = new Intent(UserLogin.this, UserDashboard.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                    return;
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(UserLogin.this, "Database error on login: "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }else{
+                                    // no firebase user
+                                    Toast.makeText(UserLogin.this, "mAuth has no firebase user.", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 Toast.makeText(UserLogin.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }

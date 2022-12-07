@@ -15,6 +15,20 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
+            android:name=".VerifiedPaymentsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Reports"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".VerifyPayments"
             android:exported="false">
             <meta-data
@@ -36,7 +50,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserPayments"
+            android:name=".UserPaymentsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

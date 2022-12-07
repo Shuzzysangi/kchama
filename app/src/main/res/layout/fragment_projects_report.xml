@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProjectsReport"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Projects: "
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/tvProjectsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:textSize="18sp"
+            android:layout_marginLeft="15dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:text="KChama Projects"
+        android:layout_marginTop="5dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:background="#51B435"
+        android:gravity="center"
+        android:padding="5dp"
+        >
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="S/No."
+            android:layout_marginStart="15dp"
+            android:gravity="end"
+            />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            />
+    </LinearLayout>
+
+<!--    Kchama projects in Listview-->
+ <ListView
+     android:id="@+id/lvProjects"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"/>
+
+</LinearLayout>

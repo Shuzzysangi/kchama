@@ -1,7 +1,6 @@
 package com.sharon.sample.mpesa;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -13,21 +12,15 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 
-public class UserPayments extends AppCompatActivity {
+public class UserPaymentsActivity extends AppCompatActivity {
     Button restartCycle;
     FirebaseDatabase database;
     DatabaseReference usersRef, awardedUsersRef, cycleRef;
@@ -77,10 +70,10 @@ public class UserPayments extends AppCompatActivity {
 
                 loader.dismiss();
                 if(!foundUser){
-                    Toast.makeText(UserPayments.this, "The cycle is ready to begin!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPaymentsActivity.this, "The cycle is ready to begin!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(UserPayments.this, "Award cycle restarted successfully.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserPaymentsActivity.this, "Award cycle restarted successfully.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -104,7 +97,11 @@ public class UserPayments extends AppCompatActivity {
         setSpinDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picker = new TimePickerDialog(UserPayments.this,
+                Calendar calendar = Calendar.getInstance();
+                hour = calendar.get(Calendar.HOUR_OF_DAY);
+                minute = calendar.get(Calendar.MINUTE);
+                
+                picker = new TimePickerDialog(UserPaymentsActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
@@ -122,19 +119,18 @@ public class UserPayments extends AppCompatActivity {
                 month = datePicker.getMonth()+1;
                 year  = datePicker.getYear();
 
-                Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, month, date, hour, minute);
                 // format date
                 spinDate = date+"/"+month+"/"+year+" "+hour+":"+minute;
 
-                Toast.makeText(UserPayments.this, "Spin Date: "+spinDate, Toast.LENGTH_LONG).show();
+                Toast.makeText(UserPaymentsActivity.this, "Spin Date: "+spinDate, Toast.LENGTH_LONG).show();
 
                 // set spin date in firebase
                 cycleRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         cycleRef.setValue(spinDate);
-                        Toast.makeText(UserPayments.this, "Spin date set successfully. ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserPaymentsActivity.this, "Spin date set successfully. ", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

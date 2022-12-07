@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F0F0F0"
+    android:padding="5dp"
+    android:layout_margin="10dp">
+    <TextView
+        android:id="@+id/sNo"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="1"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Project Name"
+        android:padding="3dp"/>
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Project Desctiption goes here. Lorem ipsium dolor sit amet "
+        android:padding="3dp"/>
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="02/12/2022"
+        android:gravity="start"
+        android:padding="3dp"/>
+</LinearLayout>

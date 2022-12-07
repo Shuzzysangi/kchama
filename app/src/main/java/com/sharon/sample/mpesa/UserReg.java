@@ -2,7 +2,9 @@ package com.sharon.sample.mpesa;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,6 +35,7 @@ public class UserReg extends AppCompatActivity {
     private ProgressDialog loader;
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabaseRef;
+    SharedPreferences prefs;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class UserReg extends AppCompatActivity {
         userRegisterButton=findViewById(R.id.userRegisterButton);
         loader=new ProgressDialog(this);
         mAuth=FirebaseAuth.getInstance();
+
         userRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +59,7 @@ public class UserReg extends AppCompatActivity {
                 final String userId = registerUserID.getText().toString().trim();
                 final String fullName = registerFullName.getText().toString().trim();
                 final String phoneNumber = registerPhoneNumber.getText().toString().trim();
-
+                prefs = getSharedPreferences("user_details", Context.MODE_PRIVATE);
 
                 if (TextUtils.isEmpty(email)) {
                     registerEmail.setError("Email is Required!");
@@ -109,6 +113,16 @@ public class UserReg extends AppCompatActivity {
                                             Toast.makeText(UserReg.this,"Data Set Successfully",Toast.LENGTH_SHORT).show();
 
                                             Intent intent=new Intent(UserReg.this,AdminDashboard.class);
+
+                                            // save user info to shared preferences
+                                            SharedPreferences.Editor editor = prefs.edit();
+                                            editor.putString("name", fullName);
+                                            editor.putString("phoneNumber", phoneNumber);
+                                            editor.putString("email", email);
+                                            editor.putString("password", password);
+                                            editor.apply();
+                                            editor.commit();
+
                                             startActivity(intent);
                                             finish();
                                             loader.dismiss();
