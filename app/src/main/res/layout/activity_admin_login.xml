@@ -24,35 +24,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                />
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Admin login page"
+                android:text="Admin login"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
-            <TextView
-                android:text="sign_in_to_continue"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            <ImageView
+               android:src="@drawable/logo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -65,7 +53,7 @@
                     android:id="@+id/loginEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="enter_email"
+                    android:hint="Enter Email"
                     android:inputType="textEmailAddress"
                     android:drawablePadding="10dp"
                     android:textColor="#000"
@@ -86,7 +74,7 @@
                     android:id="@+id/loginPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="enter_your_password"
+                    android:hint="Enter Password"
                     android:inputType="textPassword"
                     android:drawablePadding="10dp"
                     android:textColor="#000"
@@ -100,23 +88,15 @@
 
             <Button
                 android:id="@+id/loginButton"
-                android:text="sign_in_now"
+                android:text="Sign In"
                 android:textAllCaps="false"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:text="Welcome to the Admin Page"
-                android:layout_marginTop="15dp"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
