@@ -23,7 +23,7 @@ public class ReportsViewPagerAdapter extends FragmentStateAdapter {
         switch (position){
             case 0:
                 // Individual reports fragment
-                PersonalReport personalReport = new PersonalReport();
+                UserReport personalReport = new UserReport();
                 return personalReport;
             case 1:
                 // MeriGo Report fragment

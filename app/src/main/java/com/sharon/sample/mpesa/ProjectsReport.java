@@ -47,7 +47,7 @@ public class ProjectsReport extends Fragment {
         lvProjects.setAdapter(adapter);
 
         // get projects from database
-        loader.setMessage("Getting projects..");
+        loader.setMessage("Generating projects report..");
         loader.show();
         projectsRef.addValueEventListener(new ValueEventListener() {
             @Override
