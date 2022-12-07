@@ -38,6 +38,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
+                android:src="@drawable/logo"
                 android:layout_marginTop="20dp"/>
 
             <LinearLayout
@@ -156,11 +157,11 @@
 
                 <Button
                     android:id="@+id/userRegisterButton"
-                    android:text="sign_up_now"
+                    android:text="Sign In"
                     android:textAllCaps="false"
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center"
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
